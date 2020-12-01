@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+</head>
+<body>
+  <div id="app">
+    <v-app>
+      <v-main>
+        <v-container>
+          
+          <v-card>
+            <v-img
+                height="200"
+                src="banner_header.png"
+              >
+              <v-col md="8" class="pt-16">          
+                <p class="font-weight-bold white--text">
+                  {{mensaje1}}
+                </p>
+                <p class="white--text">
+                  {{mensaje2}}
+                </p>
+              </v-col>    
+            </v-img>
+            <v-stepper v-model="e1">
+              <v-stepper-header>
+                <v-stepper-step
+                  :complete="e1 > 1"
+                  step="1"
+                >
+                  Datos Personales
+                </v-stepper-step>
+          
+                <v-divider></v-divider>
+          
+                <v-stepper-step
+                  :complete="e1 > 2"
+                  step="2"
+                >
+                  Descripción
+                </v-stepper-step>
+          
+                <v-divider></v-divider>
+          
+                <v-stepper-step step="3">
+                  Anexos
+                </v-stepper-step>
+              </v-stepper-header>
+          
+              <v-stepper-items>
+                <v-stepper-content step="1">
+                  <v-card
+                    class="mb-12"
+                    color="white"
+                    
+                  >
+                
+                    <v-expansion-panels
+                    v-model="panel">
+                      <v-expansion-panel
+                        value='1'
+                        :key='1'
+                      >
+                        <v-expansion-panel-header>
+                          Registro
+                        </v-expansion-panel-header>
+                        <v-expansion-panel-content>
+                          
+                            <v-row>
+                              <v-col :key="1">
+                                  <v-card
+                                  outlined
+                                  tile
+                                  dense
+                                  width="400"
+                                  >
+                                      <v-select
+                                      color="red"
+                                      :items="items_medio_respuesta"
+                                      label="Seleccione un medio para la respuesta"
+                                      outlined
+                                      required
+                                      item-value="key"
+                                      item-text="label"
+                                      v-model="medio_respuesta"
+                                      
+                                    
+                                      
+                                      ></v-select>
+                                  </v-card>
+                              </v-col>
+                              <v-col :key="1">
+                                  <v-card
+                                  outlined
+                                  tile
+                                  dense
+                                  width="400"
+                                  >
+                                      <v-select
+                                      color="red"
+                                      :items="items_tipo_persona"
+                                      label="Tipo de Persona"
+                                      item-value="key"
+                                      item-text="label"
+                                      outlined
+                                      required
+                                      v-model="tipo_persona"
+                                      
+                                      ></v-select>
+                                  </v-card>
+                              </v-col>
+                        
+                          
+                          
+                          
+                              <v-col :key="1">
+                                  <v-card
+                                  outlined
+                                  tile
+                                  dense
+                                  width="400"
+                                  >
+                                      <v-select
+                                      color="red"
+                                      :items="items_tipo_identificacion"
+                                      label="Tipo de identificación"
+                                      outlined
+                                      required
+                                      item-value="key"
+                                      item-text="label"
+                                      v-model="tipo_identificacion"
+                                      
+                                      ></v-select>
+                                  </v-card>
+                              </v-col>
+                              <v-col :key="1">
+                                  <v-card
+                                  outlined
+                                  tile
+                                  dense
+                                  width="400"
+                                  >
+                                      <v-text-field
+                                          outlined
+                                          v-model="numero_identificacion"
+                                          :rules="nameRules"
+                                          :counter="10"
+                                          label="Número de Identificación"
+                                          required
+                                      ></v-text-field>
+                                  </v-card>
+                              </v-col>
+                          
+                            
+                          
+                              <v-col :key="1">
+                                  <v-card
+                                  outlined
+                                  tile
+                                  dense
+                                  width="400"
+                                  >
+                                      <v-text-field
+                                          outlined
+                                          v-model="nombres"
+                                          :rules="nameRules"
+                                          :counter="10"
+                                          label="Nombres"
+                                          required
+                                      ></v-text-field>
+                                  </v-card>
+                              </v-col>
+                              <v-col :key="1">
+                                  <v-card
+                                  outlined
+                                  tile
+                                  dense
+                                  width="400"
+                                  >
+                                      <v-text-field
+                                          outlined
+                                          v-model="primer_apellido"
+                                          :rules="nameRules"
+                                          :counter="10"
+                                          label="Primer Apellido"
+                                          required
+                                      ></v-text-field>
+                                  </v-card>
+                              </v-col>
+                        
+                          
+                         
+                              <v-col :key="1">
+                                  <v-card
+                                  outlined
+                                  tile
+                                  dense
+                                  width="400"
+                                  >
+                                      <v-text-field
+                                          outlined
+                                          v-model="segundo_apellido"
+                                          :rules="nameRules"
+                                          :counter="10"
+                                          label="Segundo Apellido"
+                                          required
+                                      ></v-text-field>
+                                  </v-card>
+                              </v-col>
+                              <v-col :key="1">
+                                <v-card
+                                outlined
+                                tile
+                                dense
+                                width="400"
+                                >
+                                    <v-text-field
+                                        outlined
+                                        v-model="email"
+                                        :rules="nameRules"
+                                        :counter="10"
+                                        label="E-mail"
+                                        required
+                                    ></v-text-field>
+                                </v-card>
+                            </v-col>
+                          
+                          
+                          
+                            <v-col :key="1">
+                                <v-card
+                                outlined
+                                tile
+                                dense
+                                width="400"
+                                > 
+                                    <v-text-field
+                                        outlined
+                                        v-model="email_2"
+                                        :rules="nameRules"
+                                        :counter="10"
+                                        label="Confirme E-mail"
+                                        required
+                                    ></v-text-field>
+                                </v-card>
+                            </v-col>
+                            <v-col :key="1">
+                              <v-card
+                              outlined
+                              tile
+                              dense
+                              width="400"
+                              >
+                                  <v-text-field
+                                      outlined
+                                      v-model="direccion"
+                                      :rules="nameRules"
+                                      :counter="10"
+                                      label="Dirección"
+                                      required
+                                  ></v-text-field>
+                              </v-card>
+                          </v-col>
+                        
+                       
+                          
+                          <v-col :key="1">
+                              <v-card
+                              outlined
+                              tile
+                              dense
+                              width="400"
+                              >
+                                  <v-text-field
+                                      outlined
+                                      v-model="tel_fijo"
+                                      :rules="nameRules"
+                                      :counter="10"
+                                      label="Teléfono Fijo"
+                                      required
+                                  ></v-text-field>
+                              </v-card>
+                          </v-col>
+                          <v-col :key="1">
+                            <v-card
+                            outlined
+                            tile
+                            dense
+                            width="400"
+                            >
+                                <v-text-field
+                                    outlined
+                                    v-model="tel_movil"
+                                    :rules="nameRules"
+                                    :counter="10"
+                                    label="Teléfono Móvil"
+                                    required
+                                ></v-text-field>
+                            </v-card>
+                        </v-col>
+                      
+                      
+                          
+                        <v-col :key="1">
+                            <v-card
+                            outlined
+                            tile
+                            dense
+                            width="400"
+                            >
+                                <v-select
+                                color="red"
+                                :items="items_pais"
+                                label="País"
+                                outlined
+                                required
+                                item-value="key"
+                                item-text="label"
+                                v-model="medio_respuesta"
+                              
+                                
+                                ></v-select>
+                            </v-card>
+                        </v-col>
+                        <v-col :key="1">
+                            <v-card
+                            outlined
+                            tile
+                            dense
+                            width="400"
+                            >
+                                <v-select
+                                color="red"
+                                :items="items_dpto"
+                                label="Departamento"
+                                item-value="key"
+                                item-text="label"
+                                outlined
+                                required
+                                v-model="tipo_persona"
+                                
+                                ></v-select>
+                            </v-card>
+                        </v-col>
+                         
+                              <v-col :key="1">
+                                <v-card
+                                outlined
+                                tile
+                                dense
+                                width="400"
+                                >
+                                    <v-select
+                                    color="red"
+                                    :items="items_muni"
+                                    label="Municipio"
+                                    item-value="key"
+                                    item-text="label"
+                                    outlined
+                                    required
+                                    v-model="tipo_persona"
+                                    
+                                    ></v-select>
+                                </v-card>
+                            </v-col>
+                        
+                          </v-row>
+
+                          <v-btn
+                            color="primary"
+                            @click="e1 = 3"
+                          >
+                            Confirmar Persona
+                          </v-btn>
+
+                        </v-expansion-panel-content>
+                        
+                      </v-expansion-panel>
+                      <v-expansion-panel
+                      
+                        :key='1'
+                      >
+                        <v-expansion-panel-header>
+                          Personas confirmadas
+                        </v-expansion-panel-header>
+                        <v-expansion-panel-content>  
+                          
+                          
+                          <v-data-table
+                            dense
+                            :headers="headers"
+                            :items="desserts"
+                            item-key="name"
+                            class="elevation-1"
+                          ></v-data-table>
+                        </v-expansion-panel-content>
+                      </v-expansion-panel>
+                    </v-expansion-panels>
+                
+                  
+                
+                  </v-card>
+          
+                  <v-btn
+                    color="primary"
+                    @click="e1 = 2"
+                  >
+                    Continue
+                  </v-btn>
+          
+                  <v-btn text>
+                    Cancel
+                  </v-btn>
+                </v-stepper-content>
+          
+                <v-stepper-content step="2">
+                  <v-card
+                    class="mb-12"
+                   
+                  >
+                
+                  <v-col
+                      class="d-flex"
+                      cols="12"
+                      sm="6"
+                    >
+                      <v-select
+                        :items="items"
+                        label="Canal"
+                        solo
+                      ></v-select>
+                    </v-col>
+                    <v-col
+                      class="d-flex"
+                      cols="12"
+                      sm="6"
+                    >
+                      <v-text-field
+                        outlined
+                        v-model="titulo"
+                        
+                        :counter="10"
+                        label="Título"
+                        required
+                      ></v-text-field>
+                    </v-col>
+                    <v-col
+                      class="d-flex"
+                      cols="12"
+                      sm="6"
+                    >
+                      <v-select
+                        :items="items"
+                        label="Modalidad"
+                        solo
+                        disabled
+                        value="Escrita"
+                      ></v-select>
+                    </v-col>
+                    <v-col
+                      class="d-flex"
+                      cols="12"
+                      sm="6"
+                    >
+                      <v-select
+                        :items="items"
+                        label="Soporte"
+                        solo
+                        disabled
+                      ></v-select>
+                    </v-col>
+
+                    <v-col
+                      cols="12"
+                      md="6"
+                    >
+                      <v-textarea
+                        name="input-7-1"
+                        label="Descripcion de la peticion"
+                      
+                        hint="Hint text"
+                      ></v-textarea>
+                    </v-col>
+   
+                  </v-card>
+          
+                  <v-btn
+                    color="primary"
+                    @click="e1 = 3"
+                  >
+                    Continue
+                  </v-btn>
+          
+                  <v-btn text>
+                    Cancel
+                  </v-btn>
+                </v-stepper-content>
+          
+                <v-stepper-content step="3">
+                  <v-card
+                    
+                    
+                  >
+                
+                    <v-checkbox v-model="checkbox">
+                      <template v-slot:label>
+                        <div>
+                          He leido y acepto la 
+                          <v-tooltip bottom>
+                            <template v-slot:activator="{ on }">
+                              <a
+                                target="_blank"
+                                :href="link_privacidad"
+                                @click.stop
+                                v-on="on"
+                              >
+                                politica de privacidad
+                              </a>
+                            </template>
+                            Abrir en nueva ventana
+                          </v-tooltip>
+                          
+                        </div>
+                      </template>
+                    </v-checkbox>
+                    <v-file-input
+                    v-model="files"
+                    color="deep-purple accent-4"
+                    counter
+                    label="File input"
+                    multiple
+                    placeholder="Select your files"
+                    prepend-icon="mdi-paperclip"
+                    outlined
+                    :show-size="1000"
+                    >
+                      <template v-slot:selection="{ index, text }">
+                        <v-chip
+                          v-if="index < 2"
+                          color="deep-purple accent-4"
+                          dark
+                          label
+                          small
+                        >
+                          {{ text }}
+                        </v-chip>
+                  
+                        <span
+                          v-else-if="index === 2"
+                          class="overline grey--text text--darken-3 mx-2"
+                        >
+                          +{{ files.length - 2 }} File(s)
+                        </span>
+                      </template>
+                    </v-file-input>
+                    <v-subheader> Puede verificar y/o modificar los datos, devolviendose en las pestañas.
+                      Cuando este seguro presione "Enviar Solicitud."</v-subheader>
+                  </v-card>
+          
+                  <v-btn
+                    color="primary"
+                    @click="e1 = 1"
+                  >
+                    Enviar Solicitud
+                  </v-btn>
+          
+                  <v-btn text>
+                    Cancel
+                  </v-btn>
+                </v-stepper-content>
+              </v-stepper-items>
+            </v-stepper>
+
+          </v-card>
+
+
+
+        </v-container>
+      </v-main>
+    </v-app>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script>
+    new Vue({
+        el: '#app',
+        vuetify: new Vuetify(),
+        data: () => ({
+            e1: 1,
+            mensaje1: 'ARGOGPL-MINAS,',
+            mensaje2: "con el fin de brindar un mejor servicio y facilitar la \
+                      interacción con los ciudadanos, implementó el Aplicativo Ventanilla Única, \
+                      el mismo funciona como un formulario guía para que tanto ciudadanos como \
+                      entidades puedan elevar sus Peticiones, Quejas, Reclamos, Sugerencias y \
+                      demás; adjuntando los documentos requeridos para dar tramite da las mismas.",
+                   
+            medio_respuesta: null,
+            tipo_persona:null,
+            tipo_identificacion: null,
+            panel : [1,0],
+            panel_registro: true,
+            panel_confirmados: false,
+
+            items_medio_respuesta : [
+                {'key':1,'label':'Correo Electronico'},
+                {'key':2,'label':'A la dirección - Correo Postal'}
+            ],
+
+            items_tipo_persona: [
+                {'key':1,'label':'Solicitante'}
+            ],
+            items_tipo_identificacion:[
+                {'key':1, 'label': 'Cédula de ciudadania'},
+                {'key':5, 'label': 'NIT'},
+                {'key':3, 'label': 'Cédula extranjera'},
+                {'key':2, 'label': 'Tarjeta de identidad'},
+                {'key':6, 'label': 'NUIP'},
+                {'key':4, 'label': 'Pasaporte'}
+            ],
+            items_pais: [
+                {'key':170,'label': 'Colombia'}
+            ],
+
+            headers: [
+              {
+                text: 'Tipo Solicitante',
+                align: 'start',
+                value: 'tipo_solicitante',
+              },
+              { text: 'identificacion', value: 'identificacion' },
+              { text: 'Nombres', value: 'nombres' },
+              { text: 'Direccion', value: 'direccion' },
+              { text: 'E-mail', value: 'email' },
+              { text: 'Telefono', value: 'telefono' },
+              { text: 'Accion', value: '' }
+            ],
+            desserts: [
+              {
+                tipo_solicitante: 'Solicitante',
+                identificacion: '101545523',
+                nombres: 'Cristian florez',
+                direccion: 'Av 123 N 89',
+                email: 'crist1@gmail.com',
+                telefono: '1234'
+              },
+            ], 
+            files: [],
+            checkbox: false,
+            link_privacidad: 'https://argogplminas.cogeinsas.com/formularioMinEnergia/archivos/POLITICA_DE_TRATAMIENTO_DE_PROTECCION_DE_DATOS_PERSONALES.pdf'
+            
+        }),
+  
+    })
+  </script>
+</body>
+</html>
