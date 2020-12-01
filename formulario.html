@@ -12,9 +12,9 @@
       <v-main>
         <v-container>
           
-          <v-card>
+          <v-card >
             <v-img
-                height="200"
+                :height="tamaño"
                 src="banner_header.png"
               >
               <v-col md="8" class="pt-16">          
@@ -26,6 +26,8 @@
                 </p>
               </v-col>    
             </v-img>
+
+
             <v-stepper v-model="e1">
               <v-stepper-header>
                 <v-stepper-step
@@ -105,7 +107,7 @@
                                       :items="items_tipo_persona"
                                       label="Tipo de Persona"
                                       item-value="key"
-                                      item-text="label"
+                                      item-text="labels"
                                       outlined
                                       required
                                       v-model="tipo_persona"
@@ -147,7 +149,7 @@
                                       <v-text-field
                                           outlined
                                           v-model="numero_identificacion"
-                                          :rules="nameRules"
+                                          :rules="numero_id_Rules"
                                           :counter="10"
                                           label="Número de Identificación"
                                           required
@@ -320,7 +322,7 @@
                                 required
                                 item-value="key"
                                 item-text="label"
-                                v-model="medio_respuesta"
+                                v-model="pais"
                               
                                 
                                 ></v-select>
@@ -372,7 +374,7 @@
 
                           <v-btn
                             color="primary"
-                            @click="e1 = 3"
+                            v-on:click="mifuncion1"
                           >
                             Confirmar Persona
                           </v-btn>
@@ -563,9 +565,9 @@
           
                   <v-btn
                     color="primary"
-                    @click="e1 = 1"
+                    v-on:click="mifuncion"
                   >
-                    Enviar Solicitud
+                    Enviar Solidsadsadasdasdsadacitud
                   </v-btn>
           
                   <v-btn text>
@@ -598,13 +600,16 @@
                       el mismo funciona como un formulario guía para que tanto ciudadanos como \
                       entidades puedan elevar sus Peticiones, Quejas, Reclamos, Sugerencias y \
                       demás; adjuntando los documentos requeridos para dar tramite da las mismas.",
-                   
+            tamaño: "200",
             medio_respuesta: null,
             tipo_persona:null,
             tipo_identificacion: null,
+            numero_identificacion: null,
             panel : [1,0],
             panel_registro: true,
             panel_confirmados: false,
+            pais: null,
+            
 
             items_medio_respuesta : [
                 {'key':1,'label':'Correo Electronico'},
@@ -639,6 +644,7 @@
               { text: 'Telefono', value: 'telefono' },
               { text: 'Accion', value: '' }
             ],
+            
             desserts: [
               {
                 tipo_solicitante: 'Solicitante',
@@ -654,6 +660,39 @@
             link_privacidad: 'https://argogplminas.cogeinsas.com/formularioMinEnergia/archivos/POLITICA_DE_TRATAMIENTO_DE_PROTECCION_DE_DATOS_PERSONALES.pdf'
             
         }),
+
+        created() {
+          console.log('hola perrras');
+        },
+
+        methods: {
+          mifuncion(){
+            console.log("jajajaja");
+            this.e1= 1
+           
+
+            
+
+          },
+          evaluar(){
+            if (this.numero_identificacion<10){
+              return false
+            }else {
+              return true
+            }
+          },
+          mifuncion1(){
+            if (this.evaluar()){
+              console.log(this.numero_identificacion);
+              let obj={}
+              obj['cc'] = this.numero_identificacion
+              obj['pp'] = this.medio_respuesta
+              console.log(obj);
+            }
+            
+          }
+
+        }
   
     })
   </script>
